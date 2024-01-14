@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script type="module">
+      let taskId = 1;
+      // 任务调度器，当空闲时执行任务
+      function workLoop(deadline) {
+        taskId++;
+        // yield : 产生，出产，得出
+        let shouldYield = false;
+        while (!shouldYield) {
+          console.log(`Task ${taskId} executed.`);
+          // 返回当前空闲期间剩余的估计毫秒数
+          // 当没有剩余时间，需要进行下个任务调度
+          shouldYield = deadline.timeRemaining() < 1;
+        }
+        if (taskId > 20) {
+          return;
+        }
+        // 也就是再次执行这儿
+        requestIdleCallback(workLoop);
+      }
+
+      requestIdleCallback(workLoop);
+    </script>
+  </body>
+</html>
