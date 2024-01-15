@@ -23,6 +23,9 @@
           return;
         }
         // 也就是再次执行这儿
+        console.log(taskId);
+        console.log(deadline.timeRemaining());
+        if (taskId > 10) return;
         requestIdleCallback(workLoop);
       }
 

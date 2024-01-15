@@ -56,9 +56,7 @@ function performWorkOfUnit(work) {
       }
     });
   }
-
   // 3. 将vdom转换成链表，设置好指针
-
   const children = work.props.children;
   let prevChild = null;
   children.forEach((child, index) => {
