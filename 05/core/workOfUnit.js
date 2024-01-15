@@ -9,7 +9,7 @@ export function performWorkOfUnit(fiber) {
     }
   }
   // 3. 将vdom转换成链表，设置好指针
-  const children = isFunctionComponent ? [fiber.type()] : fiber.props.children;
+  const children = isFunctionComponent ? [fiber.type(fiber.props)] : fiber.props.children;
   initChildren(fiber, children);
   // 4. 返回下一个要执行的任务
   if (fiber.child) {

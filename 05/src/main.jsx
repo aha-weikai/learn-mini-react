@@ -5,16 +5,16 @@ import React from "../core/React";
 //   return <div id="app">hello mini-react! ---jsx</div>;
 // }
 
-function Counter() {
-  return <div>count</div>;
+function Counter({ num }) {
+  return <div>count:{num}</div>;
 }
 
-const App = (
+const App = () => (
   <div>
     hello, mini-react
-    <Counter></Counter>
+    <Counter num={10}></Counter>
   </div>
 );
 
 console.log(App);
-ReactDOM.createRoot(document.getElementById("root")).render(App);
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
