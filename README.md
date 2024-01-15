@@ -158,5 +158,19 @@ function render(elNode, container) {
 9. 移除 performWorkOfUnit 中的 appendChild 操作，dom 添加，统一放到链表处理结束后进行。
 
 ```js
+function workLoop(deadline) {
+  if (!nextWorkOfUnit && root) {
+    commitRoot();
+  }
+}
 
+function commitRoot() {
+  commitWork(root.child);
+}
+function commitWork(fiber) {
+  if (!fiber) return;
+  fiber.parent.dom.appendChild(fiber.dom);
+  commitWork(fiber.child);
+  commitWork(fiber.sibling);
+}
 ```
