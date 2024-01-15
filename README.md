@@ -174,3 +174,5 @@ function commitWork(fiber) {
   commitWork(fiber.sibling);
 }
 ```
+
+10. 函数式组件
