@@ -143,8 +143,6 @@ function render(elNode, container) {
 
 实际上，将渲染切片任务（dom 渲染）放在了 performWorkOfUnit 中，开启 requestIdleCallback，轮询执行切片任务。而 render 只是生成了首个任务切片的数据结构。
 
-### 疑问：空闲时间内，会不会没有执行完一个任务切片？没有执行完，会中断执行吗？如果中断了，该如何恢复？
-
 ## 中途有可能没有空余时间继续执行渲染，那么用户只会看到渲染一半的 dom，如果处理？
 
 #### 1. 计算结束后，统一添加到 dom 中
@@ -152,8 +150,6 @@ function render(elNode, container) {
 > 什么时候进行统一提交？
 > 当下一个任务没有具体值的时候（nextWorkOfUnit），链表处理完成
 > 将 dom 操作，统一提交。
-
-### 疑问：目前只做到了一次统一提交，如果后续发生变化，如何再次处理提交操作？
 
 9. 移除 performWorkOfUnit 中的 appendChild 操作，dom 添加，统一放到链表处理结束后进行。
 
