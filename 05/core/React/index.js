@@ -1,28 +1,6 @@
 import { performWorkOfUnit } from "./workOfUnit";
 import { createElement } from "./createElement";
 
-let root = null;
-
-/**
- * ## 提交根节点
- * 执行提交
- */
-function commitRoot() {
-  commitWork(root.child);
-  root = null;
-}
-
-function commitWork(fiber) {
-  if (!fiber) return;
-  let fiberParent = fiber.parent;
-  while (!fiberParent.dom) {
-    fiberParent = fiberParent.parent;
-  }
-  if (fiber.dom) fiberParent.dom.appendChild(fiber.dom);
-  commitWork(fiber.child);
-  commitWork(fiber.sibling);
-}
-
 let nextWorkOfUnit = null;
 function workLoop(deadline) {
   let shouldYield = false;
@@ -36,8 +14,29 @@ function workLoop(deadline) {
   }
   requestIdleCallback(workLoop);
 }
-
 requestIdleCallback(workLoop);
+
+let root = null;
+/**
+ * ## 提交根节点
+ */
+function commitRoot() {
+  commitWork(root.child);
+  console.log(root);
+  root = null;
+}
+
+function commitWork(fiber) {
+  console.log(fiber);
+  if (!fiber) return;
+  let fiberParent = fiber.parent;
+  while (!fiberParent.dom) {
+    fiberParent = fiberParent.parent;
+  }
+  if (fiber.dom) fiberParent.dom.appendChild(fiber.dom);
+  commitWork(fiber.child);
+  commitWork(fiber.sibling);
+}
 
 /**
  * ## 首次渲染函数

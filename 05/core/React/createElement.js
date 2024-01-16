@@ -10,8 +10,9 @@ export function createElement(type, props, ...children) {
     type,
     props: {
       ...props,
-      children: children.map(child => {
-        const isTextNode = typeof child === "string" || typeof child === "number";
+      children: children.map((child) => {
+        const isTextNode =
+          typeof child === "string" || typeof child === "number";
         return isTextNode ? createTextNode(child) : child;
       }),
     },

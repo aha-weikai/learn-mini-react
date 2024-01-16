@@ -73,7 +73,7 @@ const React ={
 6. 在浏览器空闲时，执行渲染任务。requestIdleCallback，在浏览器空闲时期被调用。https://developer.mozilla.org/zh-CN/docs/Web/API/Window/requestIdleCallback
 
 ```js
-requestIdleCallback(IdleDeadline => {
+requestIdleCallback((IdleDeadline) => {
   // 返回当前空闲期剩余时间，单位毫秒
   const leftTime = IdleDeadline.timeRemaining();
   // 如果剩余时间 < 1
@@ -176,3 +176,44 @@ function commitWork(fiber) {
 ```
 
 10. 函数式组件
+
+```js
+function Count({ num }) {
+  return <div>count:{num}</div>;
+}
+
+const app = (
+  <div>
+    hello, mini-react
+    <Count num={10}></Count>
+  </div>
+);
+
+// 打印
+const log = {
+  type: "div",
+  props: {
+    children: [
+      {
+        type: "TEXT_ELEMENT",
+        props: {
+          nodeValue: "hello, mini-react",
+          children: [],
+        },
+      },
+      {
+        type: "f Count()",
+        props: {
+          num: 10,
+          children: [],
+        },
+      },
+    ],
+  },
+};
+```
+
+> 1. 因为 FC 的 type 为函数，所以无法创建 dom 节点
+> 2. fiber 节点 extends vnode 节点
+> 3. FC 的 fiber 没有 dom 和 sibling
+> 4. 如果直接将 FC 开盒，并丢弃，需要将返回的 vnode 节点合并到它的 parent 的 props.children 中，替换掉 FC，会有效率问题
