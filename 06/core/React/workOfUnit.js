@@ -67,10 +67,14 @@ export function updateProps(dom, nextProps, prevProps) {
     }
   });
 }
-
 // 原 initChildren
 function reconcileChildren(fiber, children) {
+  // diff fiber
+  // oldFiberChild 是已经存在的fiber
+  // fiber(newFiber)是还在创建的fiber
+  // 遍历children，生成新的fiber节点
   let oldFiberChild = fiber.alternate?.child;
+
   let prevChild = null;
   children.forEach((child, index) => {
     const isSameType = oldFiberChild && oldFiberChild.type === child.type;
@@ -96,9 +100,10 @@ function reconcileChildren(fiber, children) {
         parent: fiber,
         sibling: null,
         dom: null,
-        effectTag: "placement",
+        effectTag: "placement", //放置
       };
     }
+
     if (oldFiberChild) {
       oldFiberChild = oldFiberChild.sibling;
     }

@@ -23,10 +23,8 @@ let currentRoot = null;
  * ## 提交根节点
  */
 function commitRoot() {
-  console.log("开始更新");
   commitWork(wipRoot.child);
   currentRoot = wipRoot;
-  console.log("更新完成");
   wipRoot = null;
 }
 
@@ -36,6 +34,7 @@ function commitWork(fiber) {
   while (!fiberParent.dom) {
     fiberParent = fiberParent.parent;
   }
+
   if (fiber.effectTag === "update") {
     updateProps(fiber.dom, fiber.props, fiber.alternate?.props);
   } else if (fiber.effectTag === "placement") {
@@ -46,7 +45,6 @@ function commitWork(fiber) {
 }
 
 function update() {
-  console.log("update----");
   wipRoot = {
     dom: currentRoot.dom,
     props: currentRoot.props,
