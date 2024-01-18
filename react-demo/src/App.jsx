@@ -1,5 +1,3 @@
-import "./App.css";
-
 let count = 0;
 function App() {
   function setCount() {
@@ -9,7 +7,7 @@ function App() {
   return (
     <>
       <div className="card">
-        <button onClick={() => setCount()}>count is {count}</button>
+        <button onClick={setCount}>count is {count}</button>
       </div>
     </>
   );
