@@ -224,7 +224,7 @@ const fiber = {
 > 3. FC 的 fiber 没有 dom 和 sibling
 > 4. 如果直接将 FC 开盒，并丢弃，需要将返回的 vnode 节点合并到它的 parent 的 props.children 中，替换掉 FC，会有效率问题
 
-11. 组件更新
+11. props 更新
     由于 fiber 结构是个链表，更新的话，是一个节点一个节点比对更新。
     当有更新的时候，jsx 的 vdom 会自动触发更新，然后触发 fiber 更新，目前好像没有优化，如果没看到节点复杂的复用。
 
@@ -248,3 +248,10 @@ fiber.props.children.forEach((child, index) => {
 ```
 
 这儿写成 oldFiberChild 好像更方便理解
+
+12. 组件更新
+
+> 1. 当前对应的组件更新，将当前组件更新前的 dom，添加到释放列表
+> 2. 当前组件的前面组件删除
+> 3. 当前组件的后面组件删除
+> 4. app 组件中，部分组件更新
