@@ -1,3 +1,4 @@
+// 创建的是vdom，并没有创建dom节点
 /**
  * ## 创建vnode,(element)
  * @param {string} type

@@ -23,7 +23,7 @@ requestIdleCallback(workLoop);
 
 // work in progress
 let wipRoot = null;
-let currentRoot = null;
+// let currentRoot = null;
 let deletions = [];
 let wipFiber = null;
 export function setWipFiber(fiber) {
@@ -40,7 +40,7 @@ export function pushDeletion(fiber) {
 function commitRoot() {
   deletions.forEach(commitDeletion);
   commitWork(wipRoot.child);
-  currentRoot = wipRoot;
+  // currentRoot = wipRoot;
   wipRoot = null;
   deletions = [];
 }
@@ -78,9 +78,8 @@ function update() {
   let currentFiber = wipFiber;
   return () => {
     wipRoot = {
-      dom: currentRoot.dom,
-      props: currentRoot.props,
-      alternate: currentRoot,
+      ...currentFiber,
+      alternate: currentFiber,
     };
     nextWorkOfUnit = wipRoot;
   };

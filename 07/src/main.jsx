@@ -10,19 +10,25 @@ function Counter({ num }) {
   return <div>count:{num}</div>;
 }
 
+let friendsNum = 0;
 function Bar() {
+  const update = React.update();
+  function barClick() {
+    friendsNum++;
+    update();
+  }
   console.log("bar update");
-  return <div>bar</div>;
+  return <div onClick={barClick}>bar:{friendsNum}</div>;
 }
 
 let foo = 0;
 let props = { id: "app" };
 
 const App = () => {
+  const update = React.update();
   function handleClick() {
     foo++;
     props = {};
-    const update = React.update();
     update();
   }
   return (
