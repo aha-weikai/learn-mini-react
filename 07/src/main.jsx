@@ -42,5 +42,4 @@ const App = () => {
   );
 };
 
-console.log(App);
 ReactDOM.createRoot(document.getElementById("root")).render(<App />);

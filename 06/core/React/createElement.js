@@ -25,6 +25,7 @@ export function createElement(type, props, ...children) {
  * @returns
  */
 export function createTextNode(text) {
+  debugger;
   return {
     type: "TEXT_ELEMENT",
     props: {

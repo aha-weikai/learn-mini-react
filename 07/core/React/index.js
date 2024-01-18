@@ -76,6 +76,7 @@ function commitWork(fiber) {
 
 function update() {
   let currentFiber = wipFiber;
+  console.log("update");
   return () => {
     wipRoot = {
       ...currentFiber,
@@ -91,12 +92,14 @@ function update() {
  * @param {Element} container
  */
 function render(elNode, container) {
+  console.log(elNode, container);
   wipRoot = {
     dom: container,
     props: {
       children: [elNode],
     },
   };
+  console.log(wipRoot);
   nextWorkOfUnit = wipRoot;
 }
 

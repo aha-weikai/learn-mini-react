@@ -13,11 +13,13 @@ let foo = 0;
 let props = { id: "app" };
 
 const App = () => {
+  console.log("app");
   function handleClick() {
     foo++;
     props = {};
     React.update();
   }
+  debugger;
   return (
     <div {...props}>
       hello, mini-react{foo}
