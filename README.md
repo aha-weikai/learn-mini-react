@@ -255,3 +255,11 @@ fiber.props.children.forEach((child, index) => {
 > 2. 当前组件的前面组件删除
 > 3. 当前组件的后面组件删除
 > 4. app 组件中，部分组件更新，获取到对应的组件，进行更新
+
+13. useState
+
+> 1. 组件更新过程中，执行 useState，此时，收集 state 初始值和 action，将收集到的数据添加到组件中(stateHooks:{state,queue})
+> 2. 因为有 alternate，所以可以获取到旧的 stateHooks，进行计算更新
+> 3. 因为 useState 是在组件执行时候进行调用，所以必须放在组件顶层，否则会导致执行顺序错误
+> 4. 一次渲染中多次调用 setState，将 action 收集，等到组件更新时候，进行批量执行，避免多次渲染，导致形成问题
+> 5. state 预检测，如果 state 未更新，不修改 currentFiber，不触发更新
