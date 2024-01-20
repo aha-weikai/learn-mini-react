@@ -263,3 +263,11 @@ fiber.props.children.forEach((child, index) => {
 > 3. 因为 useState 是在组件执行时候进行调用，所以必须放在组件顶层，否则会导致执行顺序错误
 > 4. 一次渲染中多次调用 setState，将 action 收集，等到组件更新时候，进行批量执行，避免多次渲染，导致性能问题
 > 5. state 预检测，如果 state 未更新，不修改 currentFiber，不触发更新
+
+14. useEffect
+
+> 1. useEffect 的使用：
+>    a. 调用时机是在 React 完成对 DOM 的渲染之后，并且在浏览器完成绘制之前
+>    b. cleanup 在调用 useEffect 之前进行调用，当 deps 为空的时候，不会调用返回的 cleanup
+> 2. 和 useState 的实现过程相差不多
+>    a. 即在 commitWork 完成后，执行 useEffect 收集的调用
